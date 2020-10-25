@@ -42,3 +42,9 @@ SELECT
     COUNT(CITY), COUNT(STATE)
 FROM
     address_book;
+
+SELECT 
+    *
+FROM
+    address_book
+ORDER BY FIRST_NAME , LAST_NAME;
