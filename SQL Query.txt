@@ -9,3 +9,12 @@ CREATE TABLE `address_book` (
     `ZIP` LONGTEXT,
     `PHONE_NO` VARCHAR(20),
 );
+
+INSERT INTO address_book VALUES
+( 'Narendra', 'Modi',
+'PMO', 'New Delhi', 'Delhi', 114102, '9765422564',
+'pmo@office.com' ),
+('Tanmay', 'Jain',
+'Mahaveer Nagar', 'Jaipur', 'Raj', 302011, '9765485884',
+'mail.tj@gmail.com')
+;
