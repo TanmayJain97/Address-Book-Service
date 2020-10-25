@@ -37,3 +37,8 @@ FROM
     address_book
 WHERE
     CITY = 'Jaipur' OR STATE = 'Rajasthan';
+	
+SELECT 
+    COUNT(CITY), COUNT(STATE)
+FROM
+    address_book;
