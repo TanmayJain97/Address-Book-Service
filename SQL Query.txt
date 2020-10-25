@@ -25,3 +25,8 @@ SET
 WHERE
     FIRST_NAME = 'Tanmay'
         AND LAST_NAME = 'Jain';
+
+DELETE FROM address_book 
+WHERE
+    FIRST_NAME = 'Narendra'
+    AND LAST_NAME = 'Modi';
