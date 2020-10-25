@@ -1,1 +1,11 @@
 CREATE DATABASE address_book_service;
+
+CREATE TABLE `address_book` (
+    `FIRST_NAME` VARCHAR(50) NOT NULL,
+    `LAST_NAME` VARCHAR(50) NOT NULL,
+    `ADDRESS` VARCHAR(500),
+    `CITY` VARCHAR(20),
+    `STATE` VARCHAR(20),
+    `ZIP` LONGTEXT,
+    `PHONE_NO` VARCHAR(20),
+);
