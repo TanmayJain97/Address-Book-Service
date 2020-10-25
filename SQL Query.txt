@@ -30,3 +30,10 @@ DELETE FROM address_book
 WHERE
     FIRST_NAME = 'Narendra'
     AND LAST_NAME = 'Modi';
+	
+SELECT 
+    *
+FROM
+    address_book
+WHERE
+    CITY = 'Jaipur' OR STATE = 'Rajasthan';
