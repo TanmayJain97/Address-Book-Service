@@ -18,3 +18,10 @@ INSERT INTO address_book VALUES
 'Mahaveer Nagar', 'Jaipur', 'Raj', 302011, '9765485884',
 'mail.tj@gmail.com')
 ;
+
+UPDATE address_book 
+SET 
+    CITY = 'Mumbai'
+WHERE
+    FIRST_NAME = 'Tanmay'
+        AND LAST_NAME = 'Jain';
