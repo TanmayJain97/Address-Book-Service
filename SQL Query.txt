@@ -8,6 +8,7 @@ CREATE TABLE `address_book` (
     `STATE` VARCHAR(20),
     `ZIP` LONGTEXT,
     `PHONE_NO` VARCHAR(20),
+	`EMAIL` VARCHAR(20)
 );
 
 INSERT INTO address_book VALUES
@@ -58,3 +59,92 @@ SELECT
     COUNT(TYPE)
 FROM
     address_book;
+	
++++++++++++Refactoring in ER Diagram Form+++++++++++++++++++++++++
+
+CREATE TABLE user_name (
+	USER_ID INT NOT NULL AUTO_INCREMENT,
+    FIRST_NAME VARCHAR(50) NOT NULL,
+    LAST_NAME VARCHAR(50) NOT NULL,
+	NAME VARCHAR(100) NOT NULL DEFAULT '-',
+    PRIMARY KEY (USER_ID)
+);
+
+INSERT INTO user_name(FIRST_NAME,LAST_NAME) VALUES
+('Narendra', 'Modi'),
+('Tanmay', 'Jain');
+UPDATE user_name SET NAME=CONCAT(CONCAT(FIRST_NAME,' '),LAST_NAME) where NAME='-';
+
+CREATE TABLE phone_data (
+	USER_ID INT NOT NULL,
+    ADDRESS VARCHAR(500),
+    CITY VARCHAR(20),
+    STATE VARCHAR(20),
+    ZIP LONGTEXT,
+    FOREIGN KEY (USER_ID) REFERENCES user_name(USER_ID)
+);
+
+INSERT INTO address_data VALUES
+(1,'PMO', 'New Delhi', 'Delhi', 114102),
+(2,'Mahaveer Nagar', 'Jaipur', 'Raj', 302011);
+
+CREATE TABLE phone_data (
+	USER_ID INT NOT NULL,
+    PHONE_NO VARCHAR(20),
+    FOREIGN KEY (USER_ID) REFERENCES user_name(USER_ID)
+);
+
+INSERT INTO phone_data VALUES
+(1,'9765422564'),
+(2,'9765485884');
+
+CREATE TABLE email_data (
+	USER_ID INT NOT NULL,
+    EMAIL VARCHAR(20),
+    FOREIGN KEY (USER_ID) REFERENCES user_name(USER_ID)
+);
+
+INSERT INTO email_data VALUES
+(1,'pmo@office.com'),
+(2,'mail.tj@gmail.com');
+
+CREATE TABLE record_type (
+	TYPE_ID INT NOT NULL AUTO_INCREMENT,
+    REC_TYPE VARCHAR(20) NOT NULL DEFAULT 'NONE',
+    PRIMARY KEY (TYPE_ID)
+);
+
+INSERT INTO record_type(REC_TYPE) VALUES
+('Family'),
+('Friends'),
+('Professional'),
+('General')
+;
+
+CREATE TABLE type_relation (
+	USER_ID INT NOT NULL,
+	TYPE_ID INT NOT NULL,
+    FOREIGN KEY (USER_ID) REFERENCES user_name(USER_ID),
+    FOREIGN KEY (TYPE_ID) REFERENCES record_type(TYPE_ID)
+);
+
+INSERT INTO type_relation VALUES
+(1,1),
+(2,4);
+
+SELECT u.FIRST_NAME,u.LAST_NAME FROM address_data a JOIN user_name u
+ON a.USER_ID=u.USER_ID
+WHERE CITY = 'Jaipur' OR STATE = 'Rajasthan';
+
+SELECT COUNT(CITY), COUNT(STATE) FROM address_data;
+
+SELECT u.FIRST_NAME,u.LAST_NAME FROM address_data a JOIN user_name u
+ON a.USER_ID=u.USER_ID
+WHERE a.CITY = 'Jaipur'
+ORDER BY u.NAME;
+
+SELECT r.REC_TYPE, COUNT(u.USER_ID) from
+user_name u join type_relation t
+on u.USER_ID=t.USER_ID
+join record_type r on t.TYPE_ID=r.REC_TYPE
+group by r.REC_TYPE;
